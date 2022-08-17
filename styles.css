@@ -21,3 +21,27 @@
     border-radius: 10px;
     padding: 0 40px 10px 40px;
 }
+
+.question-box h1 {
+    text-align: left;
+    color: black;
+}
+
+.question-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.question-button {
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: crimson;
+    color: white;
+}
+
+.question-button:disabled {
+    background-color: black;
+    color: white;
+}
