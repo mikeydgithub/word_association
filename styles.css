@@ -45,3 +45,19 @@
     background-color: black;
     color: white;
 }
+
+.answer-display {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer-display.correct {
+    color: greenyellow;
+}
+
+.answer-display.wrong {
+    color: red;
+}
+

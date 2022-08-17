@@ -28,6 +28,7 @@ const questions = [
 
 // score
 let score = 0
+let clicked = []
 scoreDisplay.textContent = score
 
 // create function for populating quetions
@@ -76,13 +77,17 @@ function populateQuestions() {
         questionButton.textContent = option
 
         // click event listener on the questionbutton
-        questionButton.addEventListener('click', () => checkAnswer(option, optionIndex +1, question.correct))
+        questionButton.addEventListener('click', () => checkAnswer(questionButton, questionBox, option, optionIndex +1, question.correct))
 
         // append each button to the buttons 
         questionButtons.append(questionButton)
        })
 
+       const answerDisplay = document.createElement('div')
+       answerDisplay.classList.add('answer-display')
+
        // take our questionDisplay by document id and append our question box to it
+       questionBox.append(answerDisplay)
        questionDisplay.append(questionBox)
     })
 }
@@ -91,7 +96,7 @@ function populateQuestions() {
 populateQuestions();
 
 // function for checking answers, taking in option, optionIndex, and correctAnswer
-function checkAnswer(option, optionIndex, correctAnswer) {
+function checkAnswer(questionButton, questionBox, option, optionIndex, correctAnswer) {
     console.log('option', option)
     console.log('optionIndex', optionIndex)
 
@@ -100,8 +105,22 @@ function checkAnswer(option, optionIndex, correctAnswer) {
         score++
         scoreDisplay.textContent = score
         // else if correct answer is not === option index score is -1 and display takes one away
+        addResult(questionBox, "Correct!", 'correct')
     } else {
         score--
         scoreDisplay.textContent = score
+        addResult(questionBox, "Wrong!", 'wrong')
     }
+    clicked.push(option)
+    questionButton.disabled = clicked.includes(option)
+}
+
+function addResult(questionBox, answer, className) {
+    const answerDisplay = questionBox.querySelector('.answer-display')
+    answerDisplay.classList.remove('wrong')
+    answerDisplay.classList.remove('correct')
+    answerDisplay.classList.add(className)
+    answerDisplay.textContent = answer
+
+
 }
