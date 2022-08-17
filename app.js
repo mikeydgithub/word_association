@@ -67,13 +67,16 @@ function populateQuestions() {
        questionBox.append(questionButtons)
 
        // using question.options. loop for each option return function for option
-       question.options.forEach(option => {
+       question.options.forEach((option, optionIndex) => {
         // quetionButton element create button
         const questionButton = document.createElement('button')
         // classlist for button.
         questionButton.classList.add('question-button')
         // set questionButton to have textcontent to be equal to the option
         questionButton.textContent = option
+
+        // click event listener on the questionbutton
+        questionButton.addEventListener('click', () => checkAnswer(option, optionIndex +1, question.correct))
 
         // append each button to the buttons 
         questionButtons.append(questionButton)
@@ -86,3 +89,19 @@ function populateQuestions() {
 
 // function callback
 populateQuestions();
+
+// function for checking answers, taking in option, optionIndex, and correctAnswer
+function checkAnswer(option, optionIndex, correctAnswer) {
+    console.log('option', option)
+    console.log('optionIndex', optionIndex)
+
+    // if option index === correct answer then increase score by 1 and display that score
+    if (optionIndex === correctAnswer) {
+        score++
+        scoreDisplay.textContent = score
+        // else if correct answer is not === option index score is -1 and display takes one away
+    } else {
+        score--
+        scoreDisplay.textContent = score
+    }
+}
